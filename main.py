@@ -1,48 +1,22 @@
-import pyperclip
-import os
+import time
+from plyer import notification
 
-FILE_NAME = "passwords.txt"
+def water_reminder():
+	# """Send a desktop notification every interval_minutes reminding to drink water."""
+	# interval = max(1, int(interval_minutes)) * 60
+	
+	while True:
+			notification.notify(
+				title="Drink Water Sradha",
+				message="Time to drink water and stay hydrated!",
+				timeout=10
+			)
+			# time.sleep(3600)
+			time.sleep(3)
+	# except KeyboardInterrupt:
+	# 	print("Water reminder stopped.")
 
-def save_password():
-    website = input("Enter website: ")
-    password = input("Enter password: ")
-    with open(FILE_NAME, "a") as f:
-        f.write(f"{website}<||>{password}\n")
-    print("Password saved.")
 
-def get_password():
-    website = input("Enter website: ")
-    if not os.path.exists(FILE_NAME):
-        print("No passwords stored yet.")
-        return
-    with open(FILE_NAME, "r") as f:
-        for line in f:
-            stored_website, stored_password = line.strip().split("<||>", 1)
-            if stored_website == website:
-                print(f"Password for {website}: {stored_password}")
-                try:
-                    pyperclip.copy(stored_password)
-                    print("Password copied to clipboard.")
-                except Exception:
-                    pass
-                return
-    print("No password found for that website.")
-
-def main():
-    while True:
-        # print("Password Manager")
-        print("1. Save a password")
-        print("2. Get a password")
-        print("3. Exit")
-        choice = input("Enter your choice: ")
-
-        if choice == "1":
-            save_password()
-        elif choice == "2":
-            get_password()
-        elif choice == "3":
-            break
-        else:
-            print("Invalid choice. Please try again.")
-
-main()
+# if __name__ == '__main__':
+	# default: remind every 60 minutes; change as needed
+	water_reminder()
